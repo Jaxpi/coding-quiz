@@ -20,42 +20,33 @@ THEN I can save my initials and score -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./assets/style.css">
     <title>Coding Quiz</title>
 </head>
+
 <body>
-    <header>
-        <h1>Coding Quiz</h1>
-        <nav>
-          <a href="LinkLocation">View high Scores</a></li>
-        </nav>
-      </header>
+  <header>
+    <nav>
+      <a id="scores" href="LinkLocation">View high Scores</a></li>
+    </nav>
+    <h1>Coding Quiz</h1>
+    <p id="timer">Timer</p>
+  </header>
   
-      <main>
-        <section class="Start" id="start">
-          <h2>Let's start the quiz!</h2>
-     <p>Loremipsumdolor.</p>
-        </section>
+  <main>
+    <section class="quiz" id="quiz">
+      <!-- this changes with each question after confirming to start -->
+      <h2 id="question">Let's start the quiz!</h2><br>
+      <div class="choices"></div>
+      <button id="startbutton">Start</button>
+    </section>
+  </main>
   
-        <section class="B" id="b">
-          <h2>SectionHeadline</h2>
-          <p>Loremipsumdolor.</p>
-        </section>
-  
-        <section class="Contact-Submission" id="contact">
-          <h2>Contact Form</h2>
-            <section id="form">
-              <label for="Name">Name:</label>
-              <input id="Name" type="text" name="Name:" size="50" placeholder="Enter your name"><br>
-              <label for="Email">Email:</label>
-              <input id="Email" type="email" name="Email:" size="50" placeholder="Enter your email">
-              <br><button type="submit">SEND</button>
-            </section>
-        </section>
-      </main>
-  
-      <footer>
-        <p>&copy2022WebsiteDesigner</p>
-      </footer>
-  
+  <footer>
+    <p>&copy 2022 Jackson Impellizeri</p>
+  </footer>
+
+  <script src="./assets/script.js"></script>
 </body>
+
 </html>
