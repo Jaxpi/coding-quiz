@@ -72,13 +72,19 @@ main {
     padding: 40px;
 }
 
-.quiz {
+#quiz {
     padding-top: 20px;
     padding: 40px;
+    min-height: 400px;
+    min-width: 300px;
     border: 2px solid black;
 }
 
-#question {
+h2 {
+    margin-bottom: 40px;
+}
+
+#questions {
     font-size: 3vw;
 }
 
@@ -90,7 +96,7 @@ main {
     justify-content: center;
 }
 
-button {
+#startbutton {
     border: 2px black;
     border-radius: 25%;
     background-color: red;
@@ -102,7 +108,7 @@ button {
     font-family: mine1, Arial, Helvetica, sans-serif;
 }
 
-button:hover {
+#startbutton:hover {
     scale: 110%;
 }
 

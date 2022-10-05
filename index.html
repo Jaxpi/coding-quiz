@@ -16,39 +16,44 @@ THEN I can save my initials and score -->
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./assets/style.css">
-    <title>Coding Quiz</title>
-</head>
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" type="text/css" href="./assets/style.css">
+      <title>Coding Quiz</title>
+  </head>
 
-<body>
-  <header>
-    <nav>
-      <a id="scores" href="LinkLocation">View high Scores</a></li>
-    </nav>
-    <h1>Coding Quiz</h1>
-    <p id="timer">Timer</p>
-  </header>
-  
-  <main>
-    <section class="quiz" id="quiz">
-      <!-- this changes with each question after confirming to start -->
-      <h2 id="question">Let's start the quiz!</h2><br>
-      <div class="choices">
-        
-      </div>
-      <button id="startbutton">Start</button>
-    </section>
-  </main>
-  
-  <footer>
-    <p>&copy 2022 Jackson Impellizeri</p>
-  </footer>
+  <body>
+    <header>
+      <nav>
+        <a id="scores" href="LinkLocation">View high Scores</a></li>
+      </nav>
+      <h1>Coding Quiz</h1>
+      <p id="timer">Timer</p>
+    </header>
+    
+    <main>
+      <section id="quiz">
+        <!-- this changes with each question after confirming to start -->
+        <h2>Let's start the quiz!</h2><br>
+        <button id="startbutton">Start</button>
+      </section>
 
-  <script src="./assets/script.js"></script>
-</body>
+      <section id="questions" class="hide">
+        <h2 id="question-title"></h2>
+        <div id="choices" class="choices">
+        </div>
+      </section>
+
+      <div id="scoreboard"></div>
+    </main>
+    
+    <footer>
+      <p>&copy 2022 Jackson Impellizeri</p>
+    </footer>
+
+    <script src="./assets/script.js"></script>
+  </body>
 
 </html>
