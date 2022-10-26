@@ -13,6 +13,7 @@ var secondsLeft = 60;
 var currentQuestionIndex = 0;
 var currentQuestion;
 
+// Function to run the timer
 function setTime() {
   var timerInterval = setInterval(function () {
     timeEl.textContent = secondsLeft + " seconds left";
@@ -25,6 +26,7 @@ function setTime() {
   }, 1000);
 }
 
+//Function to run the quiz and display the questions, creates buttons for each answer choice
 function beginQuiz(currentQuestionIndex) {
   localStorage.setItem("currentScore", 0);
   startQuiz.style.display = "none";
@@ -41,6 +43,7 @@ function beginQuiz(currentQuestionIndex) {
   };
 };
 
+// Function to stop the quiz when time is up, provide intitial entry, and display scorecard
 function sendMessage(isTimeUp) {
   if (isTimeUp === true) {
     timeEl.textContent = "Time is up!";
@@ -66,6 +69,8 @@ function sendMessage(isTimeUp) {
   scoreboardEl.textContent = "Your Score Is: " + localStorage.getItem("currentScore");
 }
 
+
+// Questions to be asked during the quiz
 var questionArray = [
   {
     question: "1. What does js stand for?",
@@ -129,11 +134,13 @@ var questionArray = [
   },
 ];
 
+// Sets the start button to run the timer and start the quiz when clicked
 startbutton.onclick = function () {
   setTime();
   beginQuiz(currentQuestionIndex);
 }
 
+// Function to determine if selected choice is correct, tallies score, handles penalties
 container.addEventListener("click", function (event) {
   event.preventDefault();
   event.stopPropagation();
@@ -153,8 +160,9 @@ container.addEventListener("click", function (event) {
       if (secondsLeft > 5) {
         secondsLeft = secondsLeft -5;
       };
-    }
+    };
   }
+  
   if(currentQuestionIndex < questionArray.length -1){
     currentQuestionIndex++;
     beginQuiz(currentQuestionIndex);
