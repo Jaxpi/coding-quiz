@@ -81,19 +81,26 @@ main {
 }
 
 h2 {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 #questions {
-    font-size: 3vw;
+    font-size: 40px;
 }
 
 .choices {
     display: flex;
+    flex-flow:  row wrap;
     min-height: 200px;
     min-width: 300px;
     align-items: center;
     justify-content: center;
+    border-radius: 25%;
+}
+
+button {
+    background-color: red;
+    font-size: 32px;
 }
 
 #startbutton {
@@ -121,3 +128,20 @@ footer {
     font-weight: bold;
     border-top: 1px solid black;
 }
+
+@media screen and (max-width: 600px) {
+    h1, #scores, #timer {
+        font-size: 24px;
+        text-align: center;
+    }
+    h1 {
+        font-family: monospace;
+        -webkit-text-stroke: 1px black;
+        text-shadow: none;
+    }
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+    

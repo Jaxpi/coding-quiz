@@ -1,11 +1,17 @@
+// DEPENDENCIES (DOM Elements)
 var timeEl = document.getElementById("timer");
 var questionTitle = document.querySelector("#question-title");
 var startbutton = document.getElementById("startbutton");
-var secondsLeft = 60;
 var startQuiz = document.querySelector("#quiz");
-var currentQuestionIndex = 0;
 var choiceEl = document.querySelector("#choices");
 var scoreboardEl = document.querySelector("#scoreboard");
+var container = document.querySelector(".choices");
+
+
+// DATA
+var secondsLeft = 60;
+var currentQuestionIndex = 0;
+var currentQuestion;
 
 function setTime() {
   var timerInterval = setInterval(function () {
@@ -22,7 +28,7 @@ function setTime() {
 function beginQuiz(currentQuestionIndex) {
   localStorage.setItem("currentScore", 0);
   startQuiz.style.display = "none";
-    var currentQuestion = questionArray[currentQuestionIndex];
+    currentQuestion = questionArray[currentQuestionIndex];
     questionTitle.textContent = currentQuestion.question;
     choiceEl.innerHTML = "";
 
@@ -33,36 +39,6 @@ function beginQuiz(currentQuestionIndex) {
     buttonNode.textContent = currentQuestion.answers[ans];
     choiceEl.appendChild(buttonNode);
   };
-
-  var container = document.querySelector(".choices");
-
-  container.addEventListener("click", function (event) {
-    event.preventDefault();
-    event.stopPropagation();
-    var element = event.target;
-    if (element.matches(".choices")) {
-      var answer = element.getAttribute("value");
-
-      if (answer === currentQuestion.correctAnswer) {
-        localStorage.setItem("isPreviousAnswerCorrect",true);
-        var currentScore = parseInt(localStorage.getItem("currentScore"))+1;
-        localStorage.setItem("currentScore", currentScore);
-        console.log("Current score = "+currentScore);
-        console.log("isPrevious = "+localStorage.getItem("isPreviousAnswerCorrect"));
-      } else {
-        localStorage.setItem("isPreviousAnswerCorrect",false);
-        if (secondsLeft > 5) {
-          secondsLeft = secondsLeft -5;
-        };
-      }
-    }
-    if(currentQuestionIndex < questionArray.length -1){
-      currentQuestionIndex++;
-      beginQuiz(currentQuestionIndex);
-    } else {
-      sendMessage(false);
-    };
-  });
 };
 
 function sendMessage(isTimeUp) {
@@ -92,7 +68,7 @@ function sendMessage(isTimeUp) {
 
 var questionArray = [
   {
-    question: "What does js stand for?",
+    question: "1. What does js stand for?",
     answers: {
       opt1: 'junior script',
       opt2: 'javascript',
@@ -102,24 +78,54 @@ var questionArray = [
     correctAnswer: 'javascript'
   },
   {
-    question: "Question 2",
+    question: "2. Where in your HTML file should the js script go?",
     answers: {
-      opt1: 'correct',
-      opt2: 'GHI1',
-      opt3: 'JKL1',
-      opt4: 'MNO1'
+      opt1: 'right before the close of the body element',
+      opt2: 'in the head element',
+      opt3: 'at the very end of the page',
+      opt4: 'in the same line as DOCTYPE'
     },
-    correctAnswer: 'correct'
+    correctAnswer: 'right before the close of the body element'
   },
   {
-    question: "Question 3",
+    question: "3. Which of these is NOT a primitive?",
     answers: {
-      opt1: 'DEF1',
-      opt2: 'correct',
-      opt3: 'JKL1',
-      opt4: 'MNO1'
+      opt1: 'boolean',
+      opt2: 'function',
+      opt3: 'string',
+      opt4: 'number'
     },
-    correctAnswer: 'correct'
+    correctAnswer: 'function'
+  },
+  {
+    question: "4. Arrays are wrapped in which of these?",
+    answers: {
+      opt1: 'parentheses',
+      opt2: 'square brackets',
+      opt3: 'curly brackets',
+      opt4: 'single quotation marks'
+    },
+    correctAnswer: 'square brackets'
+  },
+  {
+    question: "5. Which of these often accompanies an 'if' statement?",
+    answers: {
+      opt1: 'how',
+      opt2: 'so that',
+      opt3: 'because',
+      opt4: 'else'
+    },
+    correctAnswer: 'else'
+  },
+  {
+    question: "6. Why are for-loops used?",
+    answers: {
+      opt1: 'they stop functions from repeating',
+      opt2: 'to use more lines of code',
+      opt3: 'so each object in the array is included',
+      opt4: 'no one really knows'
+    },
+    correctAnswer: 'so each object in the array is included'
   },
 ];
 
@@ -127,3 +133,32 @@ startbutton.onclick = function () {
   setTime();
   beginQuiz(currentQuestionIndex);
 }
+
+container.addEventListener("click", function (event) {
+  event.preventDefault();
+  event.stopPropagation();
+  var element = event.target;
+  if (element.matches(".choices")) {
+    var answer = element.getAttribute("value");
+
+    if (answer === currentQuestion.correctAnswer) {
+      localStorage.setItem("isPreviousAnswerCorrect",true);
+      var currentScore = parseInt(localStorage.getItem("currentScore"))+1;
+      console.log(currentScore);
+      localStorage.setItem("currentScore", currentScore);
+      console.log("Current score = "+currentScore);
+      console.log("isPrevious = "+localStorage.getItem("isPreviousAnswerCorrect"));
+    } else {
+      localStorage.setItem("isPreviousAnswerCorrect",false);
+      if (secondsLeft > 5) {
+        secondsLeft = secondsLeft -5;
+      };
+    }
+  }
+  if(currentQuestionIndex < questionArray.length -1){
+    currentQuestionIndex++;
+    beginQuiz(currentQuestionIndex);
+  } else {
+    sendMessage(false);
+  };
+});
