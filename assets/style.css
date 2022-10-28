@@ -6,12 +6,12 @@
 
 @font-face {
     font-family: mine1;
-    src: url(BadSignal.otf);
+    src: url(./fonts/BadSignal.otf);
 }
 
 @font-face {
     font-family: mine2;
-    src: url(sketches.ttf);
+    src: url(./fonts/sketches.ttf);
 }
 
 body {
