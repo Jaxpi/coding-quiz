@@ -6,16 +6,19 @@ var startQuiz = document.querySelector("#quiz");
 var choiceEl = document.querySelector("#choices");
 var scoreboardEl = document.querySelector("#scoreboard");
 var container = document.querySelector(".choices");
+var scorecard = document.getElementById("scorecard");
+var highscoresEl = document.getElementById("highscores");
 
 
 // DATA
 var secondsLeft = 60;
 var currentQuestionIndex = 0;
 var currentQuestion;
+var timerInterval;
 
 // Function to run the timer
 function setTime() {
-  var timerInterval = setInterval(function () {
+  timerInterval = setInterval(function () {
     timeEl.textContent = secondsLeft + " seconds left";
     if (secondsLeft === 0) {
       clearInterval(timerInterval);
@@ -28,13 +31,12 @@ function setTime() {
 
 //Function to run the quiz and display the questions, creates buttons for each answer choice
 function beginQuiz(currentQuestionIndex) {
-  localStorage.setItem("currentScore", 0);
   startQuiz.style.display = "none";
     currentQuestion = questionArray[currentQuestionIndex];
     questionTitle.textContent = currentQuestion.question;
     choiceEl.innerHTML = "";
 
-  for (ans in currentQuestion.answers) {
+  for (const ans in currentQuestion.answers) {
     var buttonNode = document.createElement("button");
     buttonNode.setAttribute("class", "choices");
     buttonNode.setAttribute("value", currentQuestion.answers[ans]);
@@ -47,8 +49,9 @@ function beginQuiz(currentQuestionIndex) {
 function sendMessage(isTimeUp) {
   if (isTimeUp === true) {
     timeEl.textContent = "Time is up!";
-  } else if (isTimeUp === false) {
+  } else {
     timeEl.textContent = "Quiz Over";
+    clearInterval(timerInterval);
   }
   var done = document.getElementById("questions")
   done.textContent = "Quiz Over!";
@@ -57,6 +60,12 @@ function sendMessage(isTimeUp) {
   label.innerHTML = "Enter Initials ";
   var input = document.createElement("input");
   input.type="text";
+  input.addEventListener("keydown", function(event){
+    console.log(event);
+    if (event.key === "Enter"){
+      handleEnter(event)
+    }
+  });
   localStorage.setItem("Initials", input);
   input.setAttribute("class", "scorecard");
   input.setAttribute("value", "");
@@ -137,6 +146,7 @@ var questionArray = [
 // Sets the start button to run the timer and start the quiz when clicked
 startbutton.onclick = function () {
   setTime();
+  localStorage.setItem("currentScore", 0);
   beginQuiz(currentQuestionIndex);
 }
 
@@ -150,6 +160,7 @@ container.addEventListener("click", function (event) {
 
     if (answer === currentQuestion.correctAnswer) {
       localStorage.setItem("isPreviousAnswerCorrect",true);
+      console.log(localStorage.getItem("currentScore"))
       var currentScore = parseInt(localStorage.getItem("currentScore"))+1;
       console.log(currentScore);
       localStorage.setItem("currentScore", currentScore);
@@ -157,6 +168,9 @@ container.addEventListener("click", function (event) {
       console.log("isPrevious = "+localStorage.getItem("isPreviousAnswerCorrect"));
     } else {
       localStorage.setItem("isPreviousAnswerCorrect",false);
+      var currentScore = parseInt(localStorage.getItem("currentScore"))
+      console.log("Current score = "+currentScore);
+      console.log("isPrevious = "+localStorage.getItem("isPreviousAnswerCorrect"));
       if (secondsLeft > 5) {
         secondsLeft = secondsLeft -5;
       };
@@ -170,3 +184,20 @@ container.addEventListener("click", function (event) {
     sendMessage(false);
   };
 });
+
+function handleEnter(event) {
+  const highscores = JSON.parse(localStorage.getItem("highscores"))
+  var currentScore = parseInt(localStorage.getItem("currentScore"))
+  var initials = event.target.value
+  if (highscores) {
+    console.log(highscores + "highscores");
+    highscores.push({initials: initials, score: currentScore})
+    localStorage.setItem("highscores", JSON.stringify(highscores))
+  } else{
+    localStorage.setItem("highscores", JSON.stringify([{
+      initials: initials, 
+      score: currentScore
+    }]))
+  }
+  document.getElementById("scores")
+}

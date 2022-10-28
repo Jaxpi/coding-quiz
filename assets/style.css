@@ -143,5 +143,15 @@ footer {
         flex-direction: column;
         align-items: flex-start;
     }
+    h2 {
+        font-size: 24px;
+    }
+    button.choices {
+        font-size: 24px;
+        min-height: 50px;
+        min-width: 100px;
+        padding: 5px;
+        margin: 10px;
+    }
 }
     
