@@ -19,11 +19,13 @@ WHEN the game is over THEN I can save my initials and score -->
 
   <body>
     <header>
-      <nav>
-        <a id="scores">View high Scores</a></li>
-      </nav>
-      <h1>Coding Quiz</h1>
-      <p id="timer">Timer</p>
+      <div>
+        <h1>Coding Quiz</h1>
+      </div>
+      <div class="topBar">
+        <span id="scores">View High Scores</span>
+        <span id="timer">Timer</span>
+      </div>
     </header>
     
     <main>
@@ -38,13 +40,12 @@ WHEN the game is over THEN I can save my initials and score -->
         <div id="choices" class="choices">
         </div>
       </section>
-
+      <div id="feedback"></div>
       <div id="scoreboard"></div>
       <div id="highscores"></div>
     </main>
     
     <footer>
-      <p>&copy 2022 Jackson Impellizeri</p>
     </footer>
 
     <script src="./assets/script.js"></script>
