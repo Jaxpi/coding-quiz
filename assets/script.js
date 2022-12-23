@@ -171,7 +171,7 @@ function handleEnter(event) {
 }
 // This function displays the high scores that are stored in local storage by clearing the high scores element then creating an oredered list of up to 5 items composed of the 5 stored high scores with the highest score value in descending order and appends the items to the list and the list to the highscoresEl determined using the variable at the top
 function loadHigh(event) {
-  highscoresEl.innerHTML = "";
+  highscoresEl.innerHTML = "High Scores:";
   var orderedListEl = document.createElement("ol");
   const highscores = JSON.parse(localStorage.getItem("highscores"));
   highscores.sort(scoreSort);
